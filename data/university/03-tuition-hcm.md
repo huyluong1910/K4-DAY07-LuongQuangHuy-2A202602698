@@ -1,0 +1,83 @@
+---
+doc_id: "03-tuition-hcm"
+title: "Học phí tại campus Tp. Hồ Chí Minh - Trường Đại học FPT"
+audience: "student"
+department: "finance"
+category: "tuition"
+campus: "hcm"
+language: "vi"
+source_url: "https://daihoc.fpt.edu.vn/hoc-phi-tai-campus-tp-ho-chi-minh/"
+retrieved_at: "2026-09-19"
+document_version: "2026"
+published_at: ""
+coverage: "tuition,fees,financial-policy"
+source_domain: "daihoc.fpt.edu.vn"
+source_type: "official_public_web"
+---
+# Học phí tại Campus TP. Hồ Chí Minh (Khóa K22 - Năm 2026)
+
+## Quy định chung về mức học phí
+Học phí áp dụng cho tân sinh viên khóa K22 (nhập học năm 2026) tại Campus TP. Hồ Chí Minh. Học phí chuẩn nộp theo từng học kỳ.
+
+## Học phí Ngành Công nghệ thông tin tại Campus TP.HCM
+Mức học phí các chuyên ngành Công nghệ thông tin, Kỹ thuật phần mềm, Trí tuệ nhân tạo cho thí sinh KV1 và các khu vực khác:
+| Chuyên ngành | KV1 | Các KV khác |
+| --- | --- | --- |
+| Công nghệ thông tin | 22.120.000 | 31.600.000 |
+| Kỹ thuật phần mềm | 22.120.000 | 31.600.000 |
+| Trí tuệ nhân tạo | 22.120.000 | 31.600.000 |
+| Khoa học dữ liệu và ứng dụng | 22.120.000 | 31.600.000 |
+| An toàn thông tin | 22.120.000 | 31.600.000 |
+| Vi mạch bán dẫn | 22.120.000 | 31.600.000 |
+| Công nghệ ô tô số (Automotive) | 22.120.000 | 31.600.000 |
+| Hệ thống thông tin | 22.120.000 | 31.600.000 |
+| Thiết kế đồ họa và mỹ thuật số | 22.120.000 | 31.600.000 |
+
+## Học phí Ngành Công nghệ truyền thông
+| Chuyên ngành | KV1 | Các KV khác |
+| --- | --- | --- |
+| Truyền thông đa phương tiện | 22.120.000 | 31.600.000 |
+| Quan hệ công chúng | 22.120.000 | 31.600.000 |
+| Truyền thông Marketing tích hợp | 22.120.000 | 31.600.000 |
+| Truyền thông thương hiệu | 22.120.000 | 31.600.000 |
+
+## Học phí Nhóm Ngành Ngôn ngữ
+| Chuyên ngành | KV1 | Các KV khác |
+| --- | --- | --- |
+| Ngôn ngữ Anh | 15.480.000 | 22.120.000 |
+| Tiếng Anh thương mại | 15.480.000 | 22.120.000 |
+| Ngôn ngữ Hàn Quốc | 15.480.000 | 22.120.000 |
+| Tiếng Hàn thương mại | 15.480.000 | 22.120.000 |
+| Ngôn ngữ Trung Quốc | 15.480.000 | 22.120.000 |
+| Tiếng Trung thương mại | 15.480.000 | 22.120.000 |
+
+## Học phí Ngành Luật
+| Chuyên ngành | KV1 | Các KV khác |
+| --- | --- | --- |
+| Luật | 15.480.000 | 22.120.000 |
+| Luật kinh tế | 15.480.000 | 22.120.000 |
+
+## Học phí Ngành Quản trị kinh doanh
+| Chuyên ngành | KV1 | Các KV khác |
+| --- | --- | --- |
+| Marketing | 22.120.000 | 31.600.000 |
+| Kinh doanh quốc tế | 22.120.000 | 31.600.000 |
+| Thương mại điện tử | 22.120.000 | 31.600.000 |
+| Quản trị kinh doanh | 22.120.000 | 31.600.000 |
+| Quản trị giải trí và sự kiện | 22.120.000 | 31.600.000 |
+| Quản trị trải nghiệm khách hàng | 22.120.000 | 31.600.000 |
+| Quản trị thu mua | 22.120.000 | 31.600.000 |
+| Quản trị khách sạn | 15.480.000 | 22.120.000 |
+| Quản trị dịch vụ Du lịch và Lữ hành | 15.480.000 | 22.120.000 |
+| Phân tích kinh doanh (Business Analytics) | 22.120.000 | 31.600.000 |
+| Logistics và quản lý chuỗi cung ứng toàn cầu | 22.120.000 | 31.600.000 |
+| Công nghệ tài chính | 22.120.000 | 31.600.000 |
+| Tài chính doanh nghiệp | 22.120.000 | 31.600.000 |
+| Tài chính thông minh | 22.120.000 | 31.600.000 |
+| Tài chính Ngân hàng | 22.120.000 | 31.600.000 |
+
+## Học phí Cử nhân tài năng Ngành Khoa học máy tính
+| Chuyên ngành | KV1 | Các KV khác |
+| --- | --- | --- |
+| Trí tuệ nhân tạo và Khoa học dữ liệu | 22.120.000 | 31.600.000 |
+| An ninh mạng và An toàn số | 22.120.000 | 31.600.000 |

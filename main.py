@@ -4,6 +4,12 @@ import os
 import sys
 from pathlib import Path
 
+if sys.stdout.encoding != "utf-8":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from dotenv import load_dotenv
 
 from src.agent import KnowledgeBaseAgent
@@ -64,6 +70,31 @@ def demo_llm(prompt: str) -> str:
     return f"[DEMO LLM] Generated answer from prompt preview: {preview}..."
 
 
+def get_llm_fn():
+    """Returns Gemini LLM generator if configured, else fallback to demo_llm."""
+    api_key = os.getenv("GEMINI_API_KEY")
+    if api_key:
+        try:
+            from google import genai
+            client = genai.Client(api_key=api_key)
+            model_name = os.getenv("GEMINI_CHAT_MODEL", "gemini-3.6-flash")
+
+            def gemini_llm(prompt: str) -> str:
+                try:
+                    res = client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                    )
+                    return res.text.strip()
+                except Exception:
+                    return demo_llm(prompt)
+
+            return gemini_llm
+        except Exception:
+            pass
+    return demo_llm
+
+
 def run_manual_demo(question: str | None = None, sample_files: list[str] | None = None) -> int:
     files = sample_files or SAMPLE_FILES
     query = question or "Summarize the key information from the loaded files."
@@ -119,7 +150,77 @@ def run_manual_demo(question: str | None = None, sample_files: list[str] | None 
         print(f"   content preview: {result['content'][:120].replace(chr(10), ' ')}...")
 
     print("\n=== KnowledgeBaseAgent Test ===")
-    agent = KnowledgeBaseAgent(store=store, llm_fn=demo_llm)
+    llm = get_llm_fn()
+    agent = KnowledgeBaseAgent(store=store, llm_fn=llm)
+    print(f"Question: {query}")
+    print("Agent answer:")
+    print(agent.answer(query, top_k=3))
+    return 0
+
+
+def run_university_demo(question: str | None = None) -> int:
+    """Run RAG demonstration using cleaned FPTU university documents and HeadingAwareContextChunker."""
+    query = question or "Học bổng FPTU có những mức nào và duy trì ra sao?"
+    print("=== FPTU University Regulations RAG Test ===")
+    from src.custom_chunker import HeadingAwareContextChunker
+
+    chunker = HeadingAwareContextChunker(max_chunk_size=1000, overlap=100)
+    uni_dir = Path("data/university")
+    if not uni_dir.exists():
+        print(f"Directory {uni_dir} does not exist.")
+        return 1
+
+    chunks: list[Document] = []
+    for md_path in sorted(uni_dir.glob("*.md")):
+        text = md_path.read_text(encoding="utf-8")
+        raw_chunks = chunker.chunk(text)
+        for i, chunk_text in enumerate(raw_chunks):
+            chunks.append(
+                Document(
+                    id=f"{md_path.stem}_{i}",
+                    content=chunk_text,
+                    metadata={"source": md_path.name, "doc_id": md_path.stem},
+                )
+            )
+
+    print(f"Loaded {len(chunks)} chunks from {len(list(uni_dir.glob('*.md')))} university documents.")
+
+    load_dotenv(override=False)
+    provider = os.getenv(EMBEDDING_PROVIDER_ENV, "mock").strip().lower()
+    if provider == "gemini":
+        try:
+            embedder = GeminiEmbedder(model_name=os.getenv("GEMINI_EMBEDDING_MODEL", GEMINI_EMBEDDING_MODEL))
+        except Exception:
+            embedder = _mock_embed
+    elif provider == "local":
+        try:
+            embedder = LocalEmbedder(model_name=os.getenv("LOCAL_EMBEDDING_MODEL", LOCAL_EMBEDDING_MODEL))
+        except Exception:
+            embedder = _mock_embed
+    elif provider == "openai":
+        try:
+            embedder = OpenAIEmbedder(model_name=os.getenv("OPENAI_EMBEDDING_MODEL", OPENAI_EMBEDDING_MODEL))
+        except Exception:
+            embedder = _mock_embed
+    else:
+        embedder = _mock_embed
+
+    print(f"Embedding backend: {getattr(embedder, '_backend_name', embedder.__class__.__name__)}")
+
+    store = EmbeddingStore(collection_name="fptu_regulations_store", embedding_fn=embedder)
+    store.add_documents(chunks)
+    print(f"Stored {store.get_collection_size()} chunks in EmbeddingStore")
+
+    print("\n=== EmbeddingStore Search Test ===")
+    print(f"Query: {query}")
+    results = store.search(query, top_k=3)
+    for index, r in enumerate(results, start=1):
+        print(f"{index}. score={r['score']:.3f} source={r['metadata'].get('source')}")
+        print(f"   content preview: {r['content'][:120].replace(chr(10), ' ')}...")
+
+    print("\n=== KnowledgeBaseAgent Test ===")
+    llm = get_llm_fn()
+    agent = KnowledgeBaseAgent(store=store, llm_fn=llm)
     print(f"Question: {query}")
     print("Agent answer:")
     print(agent.answer(query, top_k=3))
@@ -127,7 +228,12 @@ def run_manual_demo(question: str | None = None, sample_files: list[str] | None 
 
 
 def main() -> int:
-    question = " ".join(sys.argv[1:]).strip() if len(sys.argv) > 1 else None
+    args = sys.argv[1:]
+    if "--university" in args or "-u" in args:
+        filtered = [a for a in args if a not in ("--university", "-u")]
+        question = " ".join(filtered).strip() if filtered else None
+        return run_university_demo(question=question)
+    question = " ".join(args).strip() if args else None
     return run_manual_demo(question=question)
 
 

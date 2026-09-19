@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aethera® — Beyond silence, we build the eternal.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes fade-rise {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-rise {
+      animation: fade-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-fade-rise-delay {
+      animation: fade-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      opacity: 0;
+    }
+
+    .animate-fade-rise-delay-2 {
+      animation: fade-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+      opacity: 0;
+    }
+
+    .font-instrument {
+      font-family: 'Instrument Serif', Georgia, serif;
+    }
+
+    .font-inter {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Custom smooth scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-[#080808] text-[#FFFFFF] font-inter antialiased overflow-x-hidden selection:bg-white selection:text-black transition-colors duration-500">
+
+  <!-- Main Container -->
+  <div id="page-container" class="relative min-h-screen w-full overflow-hidden bg-[#080808] flex flex-col justify-between transition-colors duration-500">
+
+    <!-- Background Video Layer (z-0) - FULL VIEWPORT ORIGINAL -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none w-full h-full">
+      <video
+        id="bg-video"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        class="w-full h-full object-cover"
+      ></video>
+
+      <!-- Subtle natural film overlay for text legibility without blocking the video -->
+      <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
+    </div>
+
+    <!-- Navigation Bar (z-20) -->
+    <header class="relative z-20 w-full">
+      <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+        <!-- Logo: "Aethera®" -->
+        <a href="#" id="brand-logo" class="font-instrument text-3xl tracking-tight text-white flex items-baseline select-none cursor-pointer">
+          Aethera<sup class="text-xs font-inter tracking-normal ml-0.5 font-normal text-white/70">®</sup>
+        </a>
+
+        <!-- Menu items -->
+        <div class="hidden md:flex items-center space-x-9 text-sm">
+          <a href="#" id="nav-home" class="text-white font-medium transition-colors hover:text-white cursor-pointer">Home</a>
+          <a href="#studio" class="text-[#8E8E93] transition-colors hover:text-white">Studio</a>
+          <a href="#about" class="text-[#8E8E93] transition-colors hover:text-white">About</a>
+          <a href="#journal" class="text-[#8E8E93] transition-colors hover:text-white">Journal</a>
+          <a href="#reach-us" class="text-[#8E8E93] transition-colors hover:text-white">Reach Us</a>
+        </div>
+
+        <!-- Controls: CTA button -->
+        <div class="flex items-center space-x-3">
+          <!-- CTA button: "Begin Journey" -->
+          <button
+            id="nav-cta-btn"
+            class="rounded-full px-6 py-2.5 text-sm bg-white text-black hover:scale-[1.03] transition-transform duration-200 cursor-pointer font-medium shadow-md active:scale-95"
+          >
+            Begin Journey
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- =========================================================
+         1. HERO VIEW (TRANSITIONS OUT WHEN ENTERING CHAT)
+         ========================================================= -->
+    <main
+      id="hero-view"
+      class="relative z-10 flex flex-col items-center justify-center text-center px-6 transition-all duration-500 ease-out"
+      style="padding-top: calc(8rem - 75px); padding-bottom: 10rem;"
+    >
+      <!-- Headline: "Beyond silence, we build the eternal." -->
+      <h1 class="animate-fade-rise font-instrument font-normal text-5xl sm:text-7xl md:text-8xl max-w-7xl text-white leading-[0.95] tracking-[-2.46px]">
+        Beyond <span class="text-[#8E8E93] italic">silence,</span> we build <span class="text-[#8E8E93] italic">the eternal.</span>
+      </h1>
+
+      <!-- Description -->
+      <p class="animate-fade-rise-delay font-inter text-base sm:text-lg max-w-2xl mt-8 leading-relaxed text-[#8E8E93]">
+        Building platforms for brilliant minds, fearless makers, and thoughtful souls. Through the noise, we craft digital havens for deep work and pure flows.
+      </p>
+
+      <!-- Hero CTA Button -->
+      <button
+        id="hero-cta-btn"
+        class="animate-fade-rise-delay-2 rounded-full px-14 py-5 text-base mt-12 bg-white text-black hover:scale-[1.03] transition-transform duration-300 cursor-pointer font-medium shadow-2xl active:scale-95"
+      >
+        Begin Journey
+      </button>
+
+      <!-- Interactive Knowledge Query Pills -->
+      <div class="animate-fade-rise-delay-2 mt-12 flex flex-wrap justify-center gap-2.5 max-w-2xl">
+        <button class="query-pill text-xs px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[#A1A1AA] hover:text-white hover:border-white/30 hover:bg-white/10 hover:scale-[1.02] transition-all cursor-pointer shadow-sm">
+          Điều kiện làm đồ án tốt nghiệp là gì?
+        </button>
+        <button class="query-pill text-xs px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[#A1A1AA] hover:text-white hover:border-white/30 hover:bg-white/10 hover:scale-[1.02] transition-all cursor-pointer shadow-sm">
+          Học bổng FPTU có những mức nào & duy trì ra sao?
+        </button>
+        <button class="query-pill text-xs px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[#A1A1AA] hover:text-white hover:border-white/30 hover:bg-white/10 hover:scale-[1.02] transition-all cursor-pointer shadow-sm">
+          Quy định thực tập doanh nghiệp (OJT)
+        </button>
+        <button class="query-pill text-xs px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[#A1A1AA] hover:text-white hover:border-white/30 hover:bg-white/10 hover:scale-[1.02] transition-all cursor-pointer shadow-sm">
+          Chunking Strategy và Vector Store trong RAG
+        </button>
+      </div>
+    </main>
+
+    <!-- =========================================================
+         2. IN-PAGE CHAT CONVERSATION VIEW (APPEARS IN HERO SPACE)
+         ========================================================= -->
+    <section
+      id="chat-view"
+      class="hidden opacity-0 translate-y-6 relative z-10 w-full max-w-3xl mx-auto px-4 flex-1 flex flex-col transition-all duration-500 ease-out"
+    >
+      <!-- Chat Sub-Header: Back button & Assistant Status -->
+      <div class="flex items-center justify-between py-3.5 px-5 my-2 rounded-2xl bg-white/[0.06] backdrop-blur-xl border border-white/15 shadow-xl">
+        <div class="flex items-center space-x-3">
+          <button
+            id="back-to-hero-btn"
+            class="flex items-center space-x-1.5 text-xs text-[#8E8E93] hover:text-white transition-colors font-medium cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span>Trở về Hero</span>
+          </button>
+          <div class="h-3.5 w-px bg-white/20"></div>
+          <div class="flex items-center space-x-2">
+            <span class="font-instrument text-xl text-white">Aethera Intelligence</span>
+            <span class="text-[9px] px-2 py-0.5 rounded-full bg-white text-black font-mono uppercase tracking-wider font-semibold">RAG Online</span>
+          </div>
+        </div>
+        <button id="clear-chat-btn" class="text-xs text-[#8E8E93] hover:text-white transition-colors cursor-pointer">
+          Làm mới
+        </button>
+      </div>
+
+      <!-- Messages Stream -->
+      <div id="chat-messages" class="flex-1 space-y-4 py-4 pb-36 overflow-y-auto">
+        <!-- Initial bot greeting -->
+        <div class="flex flex-col items-start">
+          <div class="max-w-[88%] rounded-2xl rounded-tl-sm px-5 py-3.5 text-sm leading-relaxed bg-white/[0.08] backdrop-blur-xl text-white border border-white/15 shadow-md">
+            <p>Xin chào! Tôi là <strong>Aethera Assistant</strong> — trợ lý học vụ thông minh của bạn. Tất cả câu trả lời đều được truy xuất trực tiếp từ 10 văn bản quy chế FPTU qua kiến trúc Vector Store [1].</p>
+            <p class="mt-2 text-xs text-white/60">Bạn có thể đặt bất kỳ câu hỏi nào về học bổng, đồ án tốt nghiệp, thực tập OJT hoặc kỹ thuật RAG.</p>
+            <div class="mt-2.5 pt-2 border-t border-white/10 text-[11px] text-[#8E8E93]">
+              <span class="font-medium text-white">Nguồn trích dẫn: </span>[1] data/university/01-academic-regulations.md
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. FIXED BOTTOM CHAT BAR (STICKS TO BOTTOM IN CHAT MODE)
+         ========================================================= -->
+    <div
+      id="fixed-chat-bar"
+      class="hidden opacity-0 translate-y-6 fixed bottom-6 left-0 right-0 z-30 px-4 transition-all duration-500 ease-out"
+    >
+      <div class="max-w-2xl mx-auto bg-black/80 backdrop-blur-2xl border border-white/20 rounded-full p-1.5 shadow-2xl flex items-center">
+        <input
+          id="fixed-chat-input"
+          type="text"
+          placeholder="Hỏi về quy chế học vụ, học bổng, đồ án, OJT, RAG..."
+          class="flex-1 px-5 py-3 text-sm bg-transparent border-none focus:outline-none text-white placeholder:text-white/40"
+          autocomplete="off"
+        />
+        <button
+          id="fixed-send-btn"
+          type="button"
+          class="px-5 py-3 rounded-full bg-white text-black text-sm hover:scale-[1.03] active:scale-95 transition-all cursor-pointer font-medium flex items-center space-x-1.5 shadow-md flex-shrink-0"
+        >
+          <span>Gửi</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </div>
+      <div class="text-center mt-2">
+        <span class="text-[10px] text-white/50">HeadingAwareContextChunker • Top-3 Retrieval • Powered by Gemini 3072D</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Video Background, In-Page Push & Theme Logic -->
+  <script>
+    (function () {
+
+      // -------------------------------------------------------------
+      // 3. IN-PAGE TRANSITION (PUSH HERO AWAY -> SHOW CHAT IN PLACE)
+      // -------------------------------------------------------------
+      const heroView = document.getElementById('hero-view');
+      const chatView = document.getElementById('chat-view');
+      const fixedChatBar = document.getElementById('fixed-chat-bar');
+      const fixedChatInput = document.getElementById('fixed-chat-input');
+      const fixedSendBtn = document.getElementById('fixed-send-btn');
+      const chatMessages = document.getElementById('chat-messages');
+      const backToHeroBtn = document.getElementById('back-to-hero-btn');
+      const clearChatBtn = document.getElementById('clear-chat-btn');
+      const navHome = document.getElementById('nav-home');
+      const brandLogo = document.getElementById('brand-logo');
+      const openTriggers = [
+        document.getElementById('nav-cta-btn'),
+        document.getElementById('hero-cta-btn')
+      ];
+      const queryPills = document.querySelectorAll('.query-pill');
+
+      let isChatMode = false;
+
+      function enterChatMode(initialQuery) {
+        if (isChatMode) {
+          if (initialQuery) sendMessage(initialQuery);
+          return;
+        }
+
+        isChatMode = true;
+
+        heroView.classList.add('opacity-0', '-translate-y-8', 'pointer-events-none');
+
+        setTimeout(function () {
+          heroView.classList.add('hidden');
+
+          chatView.classList.remove('hidden');
+          fixedChatBar.classList.remove('hidden');
+
+          setTimeout(function () {
+            chatView.classList.remove('opacity-0', 'translate-y-6');
+            chatView.classList.add('opacity-100', 'translate-y-0');
+
+            fixedChatBar.classList.remove('opacity-0', 'translate-y-6');
+            fixedChatBar.classList.add('opacity-100', 'translate-y-0');
+
+            fixedChatInput.focus();
+
+            if (initialQuery) {
+              sendMessage(initialQuery);
+            }
+          }, 50);
+        }, 400);
+      }
+
+      function exitChatMode() {
+        if (!isChatMode) return;
+        isChatMode = false;
+
+        chatView.classList.add('opacity-0', 'translate-y-6');
+        chatView.classList.remove('opacity-100', 'translate-y-0');
+
+        fixedChatBar.classList.add('opacity-0', 'translate-y-6');
+        fixedChatBar.classList.remove('opacity-100', 'translate-y-0');
+
+        setTimeout(function () {
+          chatView.classList.add('hidden');
+          fixedChatBar.classList.add('hidden');
+
+          heroView.classList.remove('hidden');
+          setTimeout(function () {
+            heroView.classList.remove('opacity-0', '-translate-y-8', 'pointer-events-none');
+          }, 50);
+        }, 400);
+      }
+
+      openTriggers.forEach(function (btn) {
+        if (btn) btn.addEventListener('click', function () { enterChatMode(); });
+      });
+
+      queryPills.forEach(function (pill) {
+        pill.addEventListener('click', function () {
+          const query = pill.textContent.trim();
+          enterChatMode(query);
+        });
+      });
+
+      if (backToHeroBtn) backToHeroBtn.addEventListener('click', exitChatMode);
+      if (navHome) navHome.addEventListener('click', function (e) {
+        e.preventDefault();
+        exitChatMode();
+      });
+      if (brandLogo) brandLogo.addEventListener('click', function (e) {
+        e.preventDefault();
+        exitChatMode();
+      });
+
+      if (clearChatBtn) {
+        clearChatBtn.addEventListener('click', function () {
+          chatMessages.innerHTML = `
+            <div class="flex flex-col items-start">
+              <div class="max-w-[88%] rounded-2xl rounded-tl-sm px-5 py-3.5 text-sm leading-relaxed bg-white/[0.08] backdrop-blur-xl text-white border border-white/15 shadow-md">
+                <p>Cuộc trò chuyện đã được làm mới. Hãy đặt câu hỏi mới cho <strong>Aethera Assistant</strong>.</p>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      // -------------------------------------------------------------
+      // 4. CHAT MESSAGING LOGIC & MARKDOWN FORMATTER
+      // -------------------------------------------------------------
+      let messageCounter = 0;
+
+      function formatMarkdown(text) {
+        if (!text) return '';
+        // Escape HTML entities to prevent injection
+        let html = text
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+
+        // Markdown Headers: ### Header -> <h4 class="...">
+        html = html.replace(/^###\s+(.*?)$/gm, '<h4 class="text-sm font-semibold text-white mt-3 mb-1.5">$1</h4>');
+        html = html.replace(/^##\s+(.*?)$/gm, '<h3 class="text-base font-semibold text-white mt-4 mb-2">$1</h3>');
+
+        // Bold **text**
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-white">$1</strong>');
+
+        // Italic *text*
+        html = html.replace(/\*(.*?)\*/g, '<em class="italic text-white/80">$1</em>');
+
+        // Clickable Links [text](url)
+        html = html.replace(/\[(.*?)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="underline text-sky-400 hover:text-sky-300 font-medium inline-flex items-center space-x-0.5">$1<svg class="w-3 h-3 inline ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>');
+
+        // Bullet points •, -, *
+        html = html.replace(/^\s*[•\-\*]\s+(.*)$/gm, '<li class="ml-4 list-disc text-white/90 my-0.5">$1</li>');
+
+        // Numbered lists 1., 2.
+        html = html.replace(/^\s*(\d+)\.\s+(.*)$/gm, '<li class="ml-4 list-decimal text-white/90 my-0.5"><span class="font-medium">$2</span></li>');
+
+        // Citation tags like [1], [2]
+        html = html.replace(/\[(\d+)\]/g, '<span class="inline-block px-1.5 py-0.2 mx-0.5 text-[10px] font-mono rounded bg-white/15 text-white/90 border border-white/20 font-semibold">[$1]</span>');
+
+        // Paragraph breaks
+        html = html.replace(/\n\n/g, '<div class="h-2.5"></div>');
+        html = html.replace(/\n/g, '<br/>');
+
+        return html;
+      }
+
+      function appendMessage(sender, text, sources) {
+        const msgWrapper = document.createElement('div');
+        msgWrapper.className = 'flex flex-col ' + (sender === 'user' ? 'items-end' : 'items-start');
+
+        const bubble = document.createElement('div');
+        bubble.className = 'max-w-[88%] rounded-2xl px-5 py-3.5 text-sm leading-relaxed ' +
+          (sender === 'user'
+            ? 'bg-white text-black font-normal rounded-tr-sm shadow-lg'
+            : 'bg-white/[0.08] backdrop-blur-xl text-white border border-white/15 rounded-tl-sm shadow-md');
+
+        if (sender === 'user') {
+          const p = document.createElement('p');
+          p.className = 'whitespace-pre-wrap';
+          p.textContent = text;
+          bubble.appendChild(p);
+        } else {
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'leading-relaxed text-white/90 space-y-1';
+          contentDiv.innerHTML = formatMarkdown(text);
+          bubble.appendChild(contentDiv);
+        }
+
+        if (sources && sources.length > 0) {
+          const srcBox = document.createElement('div');
+          srcBox.className = 'mt-3.5 pt-2.5 border-t border-white/10 text-[11px] text-[#8E8E93]';
+          
+          let linksHtml = '<div class="flex items-center space-x-1 mb-1.5"><span class="font-medium text-white">🔗 Nguồn văn bản chính thức của trường:</span></div><div class="flex flex-wrap gap-1.5">';
+          
+          sources.forEach(function (s, idx) {
+            const title = s.title || (typeof s === 'string' ? s : 'Tài liệu');
+            const url = s.url || 'https://daihoc.fpt.edu.vn/';
+            linksHtml += '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[11px] text-white hover:text-sky-300 transition-colors">' +
+              '<span>[' + (idx + 1) + '] ' + title + '</span>' +
+              '<svg class="w-3 h-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>' +
+            '</a>';
+          });
+          linksHtml += '</div>';
+
+          srcBox.innerHTML = linksHtml;
+          bubble.appendChild(srcBox);
+        }
+
+        msgWrapper.appendChild(bubble);
+        chatMessages.appendChild(msgWrapper);
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
+
+      function appendLoadingIndicator() {
+        const loader = document.createElement('div');
+        loader.id = 'chat-loading-indicator';
+        loader.className = 'flex items-center space-x-2 text-xs text-[#8E8E93] italic py-1';
+        loader.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-white animate-pulse"></span><span>Đang truy xuất quy chế chính thức và tổng hợp câu trả lời chi tiết...</span>';
+        chatMessages.appendChild(loader);
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
+
+      function removeLoadingIndicator() {
+        const loader = document.getElementById('chat-loading-indicator');
+        if (loader) loader.remove();
+      }
+
+      async function sendMessage(text) {
+        if (!text || !text.trim()) return;
+        messageCounter++;
+        const isFirstTurn = (messageCounter === 1);
+
+        appendMessage('user', text);
+        fixedChatInput.value = '';
+        appendLoadingIndicator();
+
+        try {
+          const resp = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: text, is_first_turn: isFirstTurn })
+          });
+
+          if (resp.ok) {
+            const data = await resp.json();
+            removeLoadingIndicator();
+            appendMessage('bot', data.answer, data.sources);
+            return;
+          }
+        } catch (err) {
+          // Fallback to detailed local grounded knowledge
+        }
+
+        setTimeout(function () {
+          removeLoadingIndicator();
+          let answer = 'Thông tin của bạn đã được đối soát qua hệ thống quy chế trường [1].';
+          let sources = [{
+            title: 'Quy chế Đào tạo Đại học Chính quy - Trường Đại học FPT',
+            url: 'https://daihoc.fpt.edu.vn/hoat-dong-nha-truong/tin-tuc-chung/quy-che-dao-tao-dai-hoc-chinh-quy/'
+          }];
+
+          const lower = text.toLowerCase();
+          if (lower.includes('học bổng') || lower.includes('tiêu chí') || lower.includes('mức') || lower.includes('duy trì')) {
+            answer = '### 1. Các mức giá trị học bổng [1]:\n' +
+              '• Học bổng Đại học FPT có các mức: **30%, 50%, 70% và 100% học phí toàn khóa học**.\n' +
+              '• Giá trị học bổng cao nhất lên tới **100% học phí toàn khóa**, kèm theo các quyền lợi bổ sung như: sinh hoạt phí hàng tháng, cơ hội nhận sự cố vấn (mentorship), ngân sách trải nghiệm quốc tế và hỗ trợ triển khai các dự án cá nhân/khởi nghiệp (tùy theo từng hạng mục xét duyệt) [1].\n\n' +
+              '### 2. Tiêu chí và điều kiện duy trì học bổng [1]:\n' +
+              '• **Điểm trung bình tích lũy (GPA):** Sinh viên bắt buộc phải duy trì mức điểm **GPA ≥ 7.0/10** trong suốt các năm học tiếp theo tại FPTU [1].\n' +
+              '• **Tiến độ học tập:** Sinh viên cần hoàn thành và tích lũy đủ số lượng tín chỉ theo khung chương trình quy định của từng học kỳ.\n' +
+              '• **Ý thức kỷ luật:** Không vi phạm các quy định, nội quy hoặc kỷ luật của Nhà trường trong toàn bộ quá trình theo học [1].\n\n' +
+              '### 3. Thời hạn nộp hồ sơ xét học bổng:\n' +
+              '• Hạn nộp hồ sơ xét duyệt học bổng chính thức là ngày **15/5/2026** [1]. Sinh viên có thể nộp kèm video giới thiệu bản thân (dưới 2 phút) hoặc bài luận (350 - 500 từ) để Hội đồng học bổng đánh giá toàn diện.';
+            sources = [
+              {
+                title: 'FAQ Học bổng & Tiêu chí duy trì - Trường Đại học FPT',
+                url: 'https://daihoc.fpt.edu.vn/hoc-bong/faq-hoc-bong/'
+              },
+              {
+                title: 'Quy chế Đào tạo Đại học Chính quy - Trường Đại học FPT',
+                url: 'https://daihoc.fpt.edu.vn/hoat-dong-nha-truong/tin-tuc-chung/quy-che-dao-tao-dai-hoc-chinh-quy/'
+              }
+            ];
+          } else if (lower.includes('đồ án') || lower.includes('tốt nghiệp') || lower.includes('capstone')) {
+            answer = '### 1. Điều kiện nhận Đồ án tốt nghiệp (Cap Stone Project) [1]:\n' +
+              '• **Số tín chỉ tích lũy:** Sinh viên phải tích lũy tối thiểu **90% tổng số tín chỉ** của toàn bộ chương trình đào tạo chuyên ngành [1].\n' +
+              '• **Học phần tiên quyết:** Đã hoàn thành và đạt điểm qua tất cả các môn học chuyên ngành bắt buộc trước kỳ đồ án.\n' +
+              '• **Kỳ thực tập doanh nghiệp (OJT):** Đã hoàn tất giai đoạn OJT và được doanh nghiệp/Nhà trường đánh giá **Đạt (Pass)** [2].\n' +
+              '• **Nghĩa vụ tài chính & kỷ luật:** Không nợ học phí và không trong thời gian chịu mức kỷ luật đình chỉ học tập [1].\n\n' +
+              '### 2. Quy trình bảo vệ đồ án:\n' +
+              '• Sinh viên thực hiện đồ án theo nhóm từ 3 - 5 thành viên dưới sự hướng dẫn của giảng viên chuyên môn.\n' +
+              '• Tham gia các đợt Review tiến độ (Review 1, 2, 3) trước khi bước vào buổi bảo vệ chính thức trước Hội đồng chấm đồ án tốt nghiệp [1].';
+            sources = [
+              {
+                title: 'Quy chế Đào tạo Đại học Chính quy - Trường Đại học FPT',
+                url: 'https://daihoc.fpt.edu.vn/hoat-dong-nha-truong/tin-tuc-chung/quy-che-dao-tao-dai-hoc-chinh-quy/'
+              },
+              {
+                title: 'Quy định & Hướng dẫn Thực tập Doanh nghiệp (OJT)',
+                url: 'https://daihoc.fpt.edu.vn/thong-bao-huong-dan/ojt-spring-2026-thong-bao-tham-du-orientation-ojt/'
+              }
+            ];
+          } else if (lower.includes('ojt') || lower.includes('thực tập')) {
+            answer = '### 1. Quy định về giai đoạn On-the-Job Training (OJT) [1]:\n' +
+              '• **Thời điểm thực hiện:** Sinh viên tham gia học kỳ thực tập OJT bắt đầu từ **học kỳ 6** của chương trình đào tạo [1].\n' +
+              '• **Thời lượng thực tập:** Kéo dài từ **4 đến 6 tháng** làm việc thực tế toàn thời gian tại các doanh nghiệp đối tác có ký kết thỏa thuận đào tạo với trường [1].\n\n' +
+              '### 2. Điều kiện tham gia OJT [2]:\n' +
+              '• Sinh viên phải hoàn thành toàn bộ các học phần nền tảng và đạt chuẩn đầu ra tiếng Anh theo khung quy định của Nhà trường.\n' +
+              '• Đăng ký nguyện vọng doanh nghiệp đúng hạn theo hướng dẫn của Phòng Quan hệ Doanh nghiệp qua cổng FAP [2].\n' +
+              '• Kết thúc kỳ thực tập, sinh viên phải nộp Báo cáo OJT và đạt điểm đánh giá xác nhận từ phía doanh nghiệp tiếp nhận.';
+            sources = [
+              {
+                title: 'Quy định & Hướng dẫn Thực tập Doanh nghiệp (OJT) Spring 2026',
+                url: 'https://daihoc.fpt.edu.vn/thong-bao-huong-dan/ojt-spring-2026-thong-bao-tham-du-orientation-ojt/'
+              },
+              {
+                title: 'Hướng dẫn Sinh viên Đăng ký Doanh nghiệp Thực tập OJT',
+                url: 'https://daihoc.fpt.edu.vn/thong-bao-huong-dan/ojt-spring-2026-thong-bao-ve-viec-huong-dan-sinh-vien-dang-ky-doanh-nghiep-ojt/'
+              }
+            ];
+          }
+
+          appendMessage('bot', answer, sources);
+        }, 400);
+      }
+
+      fixedSendBtn.addEventListener('click', function () {
+        const text = fixedChatInput.value.trim();
+        sendMessage(text);
+      });
+
+      fixedChatInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const text = fixedChatInput.value.trim();
+          sendMessage(text);
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>

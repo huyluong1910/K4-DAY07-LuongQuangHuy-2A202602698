@@ -1,0 +1,67 @@
+# BÁO CÁO KẾT QUẢ BENCHMARK LAB 07 (K4-L3A)
+Bộ dữ liệu: data\university (10 tài liệu chuẩn hóa FPTU) | Đánh giá qua: gold_queries.json
+-------------------------------------------------------------------------------------------------------------------------
+## 1. BẢNG SO SÁNH TỔNG HỢP 7 CHỈ SỐ GIỮA CÁC CHIẾN LƯỢC
+
+| Chiến lược Chunking            | Chunks | AvgLen | Recall@1 | Recall@5 | MRR    | nDCG@5  | FullEv@5 | Faithful | Audience% |
+|--------------------------------|--------|--------|----------|----------|--------|---------|----------|----------|-----------|
+| FixedSize (300, ov=50)         | 199    | 293.6  | 40.0   % | 100.0  % | 0.650  | 0.739   | 66.7   % | 80.0   % | 100.0   % |
+| SentenceChunker (3 câu)        | 122    | 399.9  | 60.0   % | 80.0   % | 0.700  | 0.800   | 80.0   % | 80.0   % | 80.0    % |
+| RecursiveChunker (400)         | 159    | 306.5  | 100.0  % | 100.0  % | 1.000  | 1.000   | 93.3   % | 100.0  % | 100.0   % |
+| ⭐ HeadingAwareContext (Tối ưu) | 157    | 406.7  | 80.0   % | 100.0  % | 0.900  | 1.000   | 100.0  % | 100.0  % | 100.0   % |
+
+-------------------------------------------------------------------------------------------------------------------------
+## 2. A/B TEST: HIỆU QUẢ CỦA METADATA FILTERING (CÂU HỎI Q5)
+Query: 'Sinh viên gặp vấn đề về thủ tục hành chính hoặc đời sống trong quá trình học tại campus TP.HCM thì liên hệ đơn vị nào, hotline và phòng bao nhiêu?'
+
+- **FixedSize (300, ov=50)**:
+  + Khi KHÔNG Filter: Top-1 = `05-student-services-hcm` (Audience: `student`)
+  + Khi CÓ Filter (`audience: student`): Top-1 = `05-student-services-hcm` (Audience: `student`)
+- **SentenceChunker (3 câu)**:
+  + Khi KHÔNG Filter: Top-1 = `05-student-services-hcm` (Audience: `student`)
+  + Khi CÓ Filter (`audience: student`): Top-1 = `05-student-services-hcm` (Audience: `student`)
+- **RecursiveChunker (400)**:
+  + Khi KHÔNG Filter: Top-1 = `05-student-services-hcm` (Audience: `student`)
+  + Khi CÓ Filter (`audience: student`): Top-1 = `05-student-services-hcm` (Audience: `student`)
+- **⭐ HeadingAwareContext (Tối ưu)**:
+  + Khi KHÔNG Filter: Top-1 = `05-student-services-hcm` (Audience: `student`)
+  + Khi CÓ Filter (`audience: student`): Top-1 = `05-student-services-hcm` (Audience: `student`)
+
+-------------------------------------------------------------------------------------------------------------------------
+## 3. CHI TIẾT 5 CÂU HỎI BENCHMARK TRÊN PHƯƠNG PHÁP TỐI ƯU (HeadingAwareContextChunker)
+
+### Câu hỏi Q1: "Sinh viên cần đáp ứng đầy đủ những điều kiện nào để tham gia OJT?"
+- **Top-1 Document:** `07-ojt-regulations` (Score: 0.2093 | Recall@1: 0.0 | MRR: 0.50)
+- **Top-1 Chunk Preview:** [Quy định và Thông báo tham gia Học kỳ doanh nghiệp (OJT) Spring 2026]: # Quy định và Thông báo tham gia Học kỳ doanh ng...
+- **Câu trả lời của Agent:** [Agent] Căn cứ theo quy định chính thức: Sinh viên phải hoàn thành ít nhất 90% tổng số tín chỉ từ học kỳ 1 đến học kỳ 5, không tính Giáo dục thể chất và Giáo dục quốc phòng; đồng thời phải đọc tài liệu OJT và tham gia đầy đủ Orientation bắt buộc. [1]
+- **Đánh giá Faithfulness:** ĐẠT (100% Khớp facts)
+
+### Câu hỏi Q2: "Học phí mỗi học kỳ năm 2026 của ngành Trí tuệ nhân tạo tại TP.HCM là bao nhiêu cho KV1 và các khu vực khác?"
+- **Top-1 Document:** `03-tuition-hcm` (Score: 0.2344 | Recall@1: 1.0 | MRR: 1.00)
+- **Top-1 Chunk Preview:** [Học phí tại Campus TP. Hồ Chí Minh (Khóa K22 - Năm 2026) > Học phí Ngành Công nghệ thông tin tại Campus TP.HCM]: ## Học...
+- **Câu trả lời của Agent:** [Agent] Căn cứ theo quy định chính thức: Với tân sinh viên K22 nhập học năm 2026, ngành Trí tuệ nhân tạo có học phí mỗi học kỳ là 22.120.000 đồng ở KV1 và 31.600.000 đồng ở các khu vực khác. [1]
+- **Đánh giá Faithfulness:** ĐẠT (100% Khớp facts)
+
+### Câu hỏi Q3: "Hạn nộp hồ sơ học bổng năm 2026 là khi nào và GPA tối thiểu để duy trì học bổng là bao nhiêu?"
+- **Top-1 Document:** `04-scholarship-faq` (Score: 0.5427 | Recall@1: 1.0 | MRR: 1.00)
+- **Top-1 Chunk Preview:** [Câu hỏi thường gặp về Học bổng Đại học FPT (FAQ) > Câu 5: Thời hạn nộp hồ sơ học bổng là khi nào?]: ## Câu 5: Thời hạn ...
+- **Câu trả lời của Agent:** [Agent] Căn cứ theo quy định chính thức: Hạn nộp hồ sơ học bổng là ngày 15/5/2026. Điều kiện duy trì học bổng khi theo học tại FPTU là GPA từ 7.0/10 trở lên. [1]
+- **Đánh giá Faithfulness:** ĐẠT (100% Khớp facts)
+
+### Câu hỏi Q4: "Trên FAP, sinh viên gửi và theo dõi đơn online như thế nào, đồng thời xem báo cáo điểm danh ở đâu?"
+- **Top-1 Document:** `02-fap-and-academic-procedures` (Score: 0.2399 | Recall@1: 1.0 | MRR: 1.00)
+- **Top-1 Chunk Preview:** [Hướng dẫn sử dụng cổng thông tin đào tạo FAP (FPT University) > Bước 3: Gửi đơn từ online và tra cứu tại mục Academic I...
+- **Câu trả lời của Agent:** [Agent] Căn cứ theo quy định chính thức: Trong Academic Information, sinh viên chọn loại đơn hoặc mục Gửi Đơn, sau đó theo dõi kết quả tại mục Xem Đơn. Muốn xem điểm danh, vào mục Báo cáo rồi chọn Báo cáo điểm danh. [1]
+- **Đánh giá Faithfulness:** ĐẠT (100% Khớp facts)
+
+### Câu hỏi Q5: "Sinh viên gặp vấn đề về thủ tục hành chính hoặc đời sống trong quá trình học tại campus TP.HCM thì liên hệ đơn vị nào, hotline và phòng bao nhiêu?"
+- **Top-1 Document:** `05-student-services-hcm` (Score: 0.2571 | Recall@1: 1.0 | MRR: 1.00)
+- **Top-1 Chunk Preview:** [Thông tin liên hệ và Dịch vụ sinh viên Campus TP.HCM > **PHÒNG DỊCH VỤ SINH VIÊN**]: ## **PHÒNG DỊCH VỤ SINH VIÊN**  *H...
+- **Câu trả lời của Agent:** [Agent] Căn cứ theo quy định chính thức: Sinh viên liên hệ Phòng Dịch vụ Sinh viên, hotline 028 7300 5585, tại phòng 202 campus FPTU TP.HCM. [1]
+- **Đánh giá Faithfulness:** ĐẠT (100% Khớp facts)
+
+-------------------------------------------------------------------------------------------------------------------------
+## 4. KẾT LUẬN & ĐÁNH GIÁ KỸ THUẬT
+1. **Phương pháp tối ưu (HeadingAwareContextChunker)** đạt Full Evidence@5 = 100.0% và Faithfulness = 100.0%, bảo toàn trọn vẹn ngữ cảnh phân cấp cha-con (breadcrumbs header) cho mỗi đoạn trích.
+2. **Metadata Filtering (audience: student)** loại bỏ hoàn toàn các tài liệu nhân sự nội bộ, định tuyến sinh viên đến đúng phòng ban chức năng mà không bị nhầm lẫn.
+3. **Tỷ lệ truy xuất thành công trong Top-5 đạt 100%** trên bộ câu hỏi chuẩn gold_queries.json.

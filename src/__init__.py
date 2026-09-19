@@ -17,6 +17,7 @@ from .embeddings import (
     OpenAIEmbedder,
     _mock_embed,
 )
+from .custom_chunker import HeadingAwareContextChunker
 from .models import Document
 from .store import EmbeddingStore
 
@@ -25,6 +26,7 @@ __all__ = [
     "FixedSizeChunker",
     "SentenceChunker",
     "RecursiveChunker",
+    "HeadingAwareContextChunker",
     "ChunkingStrategyComparator",
     "compute_similarity",
     "EmbeddingStore",
